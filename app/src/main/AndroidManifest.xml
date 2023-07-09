@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,7 +14,27 @@
         android:theme="@style/Theme.AppFazenda"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.createFarmActivity.CreateFarmActivity"
+            android:exported="false"
+            android:label="@string/title_activity_create_farm"
+            android:theme="@style/Theme.AppFazenda" />
+        <activity
+            android:name=".ui.AppBar"
+            android:exported="false"
+            android:label="@string/title_activity_app_bar"
+            android:theme="@style/Theme.AppFazenda" />
+        <activity
+            android:name=".ui.getFarmsScreen.list.List"
+            android:exported="false"
+            android:label="@string/title_activity_list"
+            android:theme="@style/Theme.AppFazenda" />
+        <activity
+            android:name=".ui.activities.GetFarmsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_get_farms"
+            android:theme="@style/Theme.AppFazenda" />
+        <activity
+            android:name=".ui.mainActivity.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AppFazenda">

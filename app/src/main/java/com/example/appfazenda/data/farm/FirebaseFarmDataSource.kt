@@ -1,6 +1,6 @@
 package com.example.appfazenda.data.farm
 
-import com.example.appfazenda.data.farm.IFarmDataSource
+import android.util.Log
 import com.example.appfazenda.farm.model.Farm
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -44,6 +44,9 @@ class FirebaseFarmDataSource @Inject constructor(
   }
 
   override suspend fun getFarms(): List<Farm> {
+
+    Log.i("teste", reference.toString())
+
     return suspendCoroutine { continuation ->
 
       reference.get().addOnSuccessListener { snapshot ->
