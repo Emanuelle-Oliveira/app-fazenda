@@ -25,6 +25,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.appfazenda.farm.model.Farm
 import com.example.appfazenda.ui.createFarmActivity.CreateFarmActivity
+import com.example.appfazenda.ui.updateFarmActivity.UpdateFarmActivity
 import com.example.appfazenda.ui.mainActivity.getFarmsScreen.item.Item
 import kotlin.reflect.KFunction0
 import kotlin.reflect.KFunction1
@@ -41,18 +42,18 @@ fun GetFarmsScreen(
 
   val context = LocalContext.current
 
-    Column(modifier = Modifier
-      .fillMaxSize()
-      .padding(horizontal = 15.dp, vertical = 8.dp),
-      horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-      Column() {
-        Scaffold(
-          floatingActionButton = {
-            FloatingActionButton(
-              onClick = {
-                context.startActivity(Intent(context, CreateFarmActivity::class.java))
-              },
+  Column(modifier = Modifier
+    .fillMaxSize()
+    .padding(horizontal = 15.dp, vertical = 8.dp),
+    horizontalAlignment = Alignment.CenterHorizontally
+  ) {
+    Column() {
+      Scaffold(
+        floatingActionButton = {
+          FloatingActionButton(
+            onClick = {
+              context.startActivity(Intent(context, CreateFarmActivity::class.java))
+                      },
               containerColor = Color(0xFF539608),
               shape = RoundedCornerShape(16.dp),
             ) {

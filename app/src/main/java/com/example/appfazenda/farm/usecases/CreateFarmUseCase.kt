@@ -9,12 +9,9 @@ class CreateFarmUseCase @Inject constructor(
   private val farmRepository: FarmRepository
 ): ICreateFarmUseCase {
 
-  override suspend fun invoke(name: String, value: Double, employeesNumber: Int): Farm {
+  override suspend fun invoke(id: Int, name: String, value: Double, employeesNumber: Int): Farm {
     return try {
-      val id = farmRepository.getLastFarmId()
-      val newId = farmRepository.updateLastFarmId(id)
-
-      val farm = Farm(newId, name, value, employeesNumber)
+      val farm = Farm(id+1, name, value, employeesNumber)
       farmRepository.createFarm(farm)
     } catch (e: Exception) {
       throw e

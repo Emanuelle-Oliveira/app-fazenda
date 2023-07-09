@@ -1,5 +1,7 @@
 package com.example.appfazenda.ui.mainActivity.getFarmsScreen.item
 
+import android.content.Intent
+import android.os.Bundle
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,6 +30,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.appfazenda.farm.model.Farm
 import com.example.appfazenda.ui.mainActivity.getFarmsScreen.item.dialogDelete.DialogDelete
+import com.example.appfazenda.ui.updateFarmActivity.UpdateFarmActivity
 import kotlin.reflect.KFunction0
 import kotlin.reflect.KFunction1
 
@@ -71,12 +74,12 @@ fun Item(
           color = Color(0xFF539608)
         )
         Text(
-          text = "Valor: R$ $valueString",
+          text = "R$ $valueString",
           style = typography.bodySmall,
           color = Color.Gray
         )
         Text(
-          text = "Nº funcionários: ${farm.employeesNumber.toString()}",
+          text = "${farm.employeesNumber.toString()} funcionários",
           style = typography.bodySmall,
           color = Color.Gray
         )
@@ -87,9 +90,9 @@ fun Item(
       ) {
         IconButton(
           onClick = {
-            //var mochila = Bundle()
-            //mochila.putParcelable("client", client)
-            //context.startActivity((Intent(context, UpdateClientActivity::class.java)).putExtras(mochila))
+            var mochila = Bundle()
+            mochila.putParcelable("farm", farm)
+            context.startActivity((Intent(context, UpdateFarmActivity::class.java)).putExtras(mochila))
           }
         ) {
           Icon(

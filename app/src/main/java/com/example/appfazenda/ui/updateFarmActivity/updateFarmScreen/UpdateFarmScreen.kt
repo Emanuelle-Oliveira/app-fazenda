@@ -1,7 +1,6 @@
-package com.example.appfazenda.ui.createFarmActivity.createFarmScreen
+package com.example.appfazenda.ui.updateFarmActivity.updateFarmScreen
 
 import android.content.Intent
-import android.sax.TextElementListener
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
@@ -25,19 +24,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.example.appfazenda.farm.model.Farm
 import com.example.appfazenda.ui.mainActivity.MainActivity
 import kotlin.reflect.KFunction1
-import kotlin.reflect.KFunction4
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CreateFarmScreen(lastFarmId: Int, createFarm: KFunction4<Int, String, Double, Int, Unit>, updateLastFarmId: KFunction1<Int, Unit>) {
+fun UpdateFarmScreen(farm: Farm, updateFarm: KFunction1<Farm, Unit>) {
 
-  val textFieldName = remember { mutableStateOf("") }
-  val textFieldValue = remember { mutableStateOf("") }
-  val textFieldEmployeesNumber = remember { mutableStateOf("") }
+  val textFieldId = remember { mutableStateOf(farm.id.toString()) }
+  val textFieldName = remember { mutableStateOf(farm.name) }
+  val textFieldValue = remember { mutableStateOf(farm.value.toString()) }
+  val textFieldEmployeesNumber = remember { mutableStateOf(farm.employeesNumber.toString()) }
 
   val context = LocalContext.current
+
+  val enabled = remember { mutableStateOf(false) }
 
   Column(
     modifier = Modifier
@@ -45,6 +47,21 @@ fun CreateFarmScreen(lastFarmId: Int, createFarm: KFunction4<Int, String, Double
       .padding(horizontal = 15.dp, vertical = 16.dp),
     verticalArrangement = Arrangement.spacedBy(16.dp),
   ) {
+
+    OutlinedTextField(
+      value = textFieldId.value,
+      onValueChange = { textFieldId.value = it },
+      label = { Text("Nome") },
+      modifier = Modifier.fillMaxWidth(),
+      enabled = enabled.value,
+      colors = TextFieldDefaults.outlinedTextFieldColors(
+        cursorColor = Color(0xFF539608),
+        focusedLabelColor = Color(0xFF539608),
+        focusedBorderColor = Color(0xFF539608),
+        unfocusedBorderColor = Color(0xFF539608)
+      )
+    )
+
     OutlinedTextField(
       value = textFieldName.value,
       onValueChange = { textFieldName.value = it },
@@ -95,9 +112,8 @@ fun CreateFarmScreen(lastFarmId: Int, createFarm: KFunction4<Int, String, Double
         ) {
 
           try {
-            val farm = createFarm(lastFarmId, textFieldName.value, textFieldValue.value.toDouble(), textFieldEmployeesNumber.value.toInt())
-            updateLastFarmId(lastFarmId)
-            Log.i("teste", farm.toString())
+            val farm = Farm(farm.id, textFieldName.value, textFieldValue.value.toDouble(), textFieldEmployeesNumber.value.toInt())
+            updateFarm(farm)
           } finally {
             textFieldName.value = ""
             textFieldValue.value = ""

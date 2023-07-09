@@ -14,24 +14,14 @@
         android:theme="@style/Theme.AppFazenda"
         tools:targetApi="31">
         <activity
+            android:name=".ui.updateFarmActivity.UpdateFarmActivity"
+            android:exported="false"
+            android:label="@string/title_activity_update_farm"
+            android:theme="@style/Theme.AppFazenda" />
+        <activity
             android:name=".ui.createFarmActivity.CreateFarmActivity"
             android:exported="false"
             android:label="@string/title_activity_create_farm"
-            android:theme="@style/Theme.AppFazenda" />
-        <activity
-            android:name=".ui.AppBar"
-            android:exported="false"
-            android:label="@string/title_activity_app_bar"
-            android:theme="@style/Theme.AppFazenda" />
-        <activity
-            android:name=".ui.getFarmsScreen.list.List"
-            android:exported="false"
-            android:label="@string/title_activity_list"
-            android:theme="@style/Theme.AppFazenda" />
-        <activity
-            android:name=".ui.activities.GetFarmsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_get_farms"
             android:theme="@style/Theme.AppFazenda" />
         <activity
             android:name=".ui.mainActivity.MainActivity"

@@ -2,10 +2,13 @@ package com.example.appfazenda.ui.mainActivity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.lifecycleScope
 import com.example.appfazenda.farm.model.Farm
 import com.example.appfazenda.farm.usecases.contracts.ICreateFarmUseCase
@@ -31,13 +34,13 @@ class MainActivity : ComponentActivity() {
 
   private val farmsList = mutableStateOf(emptyList<Farm>())
 
-  fun deleteFarm(id: Int) {
+  private fun deleteFarm(id: Int) {
     lifecycleScope.launch {
       deleteFarmUseCase(id)
     }
   }
 
-  fun getFarms() {
+  private fun getFarms() {
     lifecycleScope.launch {
       farmsList.value = getFarmsUseCase()
     }
@@ -48,8 +51,14 @@ class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     getFarms()
+
+    //val farm = intent.getParcelableExtra<Farm>("farm")
+
     setContent {
+      val scaffoldState = rememberScaffoldState()
+      val scope = rememberCoroutineScope()
       androidx.compose.material.Scaffold(
+        scaffoldState = scaffoldState,
         topBar = { AppBar() },
       ) {
         GetFarmsScreen(farmsList, ::deleteFarm, ::getFarms)
@@ -57,4 +66,6 @@ class MainActivity : ComponentActivity() {
     }
   }
 }
+
+
 
