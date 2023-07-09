@@ -1,7 +1,6 @@
 package com.example.appfazenda.ui.createFarmActivity.createFarmScreen
 
 import android.content.Intent
-import android.sax.TextElementListener
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement

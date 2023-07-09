@@ -20,7 +20,6 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -37,10 +36,10 @@ import kotlin.reflect.KFunction1
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Item(
-  farmsList: State<List<Farm>>,
   farm: Farm,
   deleteFarm: KFunction1<Int, Unit>,
-  getFarms: KFunction0<Unit>) {
+  getFarms: KFunction0<Unit>
+) {
 
   val context = LocalContext.current
 
@@ -69,7 +68,7 @@ fun Item(
           .align(Alignment.CenterVertically)
       ) {
         Text(
-          text = farm.name.toString(),
+          text = farm.name,
           style = typography.titleLarge,
           color = Color(0xFF539608)
         )
@@ -90,7 +89,7 @@ fun Item(
       ) {
         IconButton(
           onClick = {
-            var mochila = Bundle()
+            val mochila = Bundle()
             mochila.putParcelable("farm", farm)
             context.startActivity((Intent(context, UpdateFarmActivity::class.java)).putExtras(mochila))
           }

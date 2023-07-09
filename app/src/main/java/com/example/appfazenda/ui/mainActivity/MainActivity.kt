@@ -2,7 +2,6 @@ package com.example.appfazenda.ui.mainActivity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.rememberScaffoldState
@@ -13,6 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import com.example.appfazenda.farm.model.Farm
 import com.example.appfazenda.farm.usecases.contracts.ICreateFarmUseCase
 import com.example.appfazenda.farm.usecases.contracts.IDeleteFarmUseCase
+import com.example.appfazenda.farm.usecases.contracts.IGetFarmsByIdUseCase
+import com.example.appfazenda.farm.usecases.contracts.IGetFarmsByNameUseCase
 import com.example.appfazenda.farm.usecases.contracts.IGetFarmsUseCase
 import com.example.appfazenda.ui.common.appBar.AppBar
 import com.example.appfazenda.ui.mainActivity.getFarmsScreen.GetFarmsScreen
@@ -25,6 +26,12 @@ class MainActivity : ComponentActivity() {
 
   @Inject
   lateinit var getFarmsUseCase: IGetFarmsUseCase
+
+  @Inject
+  lateinit var getFarmsByNameUseCase: IGetFarmsByNameUseCase
+
+  @Inject
+  lateinit var getFarmsByIdUseCase: IGetFarmsByIdUseCase
 
   @Inject
   lateinit var deleteFarmUseCase: IDeleteFarmUseCase
@@ -46,22 +53,32 @@ class MainActivity : ComponentActivity() {
     }
   }
 
+  private fun getFarmsByName(name: String) {
+    lifecycleScope.launch {
+      farmsList.value = getFarmsByNameUseCase(name)
+    }
+  }
+
+  private fun getFarmsById(id: Int) {
+    lifecycleScope.launch {
+      farmsList.value = getFarmsByIdUseCase(id)
+    }
+  }
+
   @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "UnusedMaterialScaffoldPaddingParameter")
   @OptIn(ExperimentalMaterial3Api::class)
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     getFarms()
 
-    //val farm = intent.getParcelableExtra<Farm>("farm")
-
     setContent {
       val scaffoldState = rememberScaffoldState()
-      val scope = rememberCoroutineScope()
+      rememberCoroutineScope()
       androidx.compose.material.Scaffold(
         scaffoldState = scaffoldState,
         topBar = { AppBar() },
       ) {
-        GetFarmsScreen(farmsList, ::deleteFarm, ::getFarms)
+        GetFarmsScreen(farmsList, ::deleteFarm, ::getFarms, ::getFarmsByName, ::getFarmsById)
       }
     }
   }

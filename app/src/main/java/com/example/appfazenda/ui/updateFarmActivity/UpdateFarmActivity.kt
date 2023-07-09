@@ -1,14 +1,12 @@
 package com.example.appfazenda.ui.updateFarmActivity
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.appfazenda.farm.model.Farm
 import com.example.appfazenda.farm.usecases.contracts.IUpdateFarmUseCase
@@ -39,7 +37,7 @@ class UpdateFarmActivity : ComponentActivity() {
 
     setContent {
       val scaffoldState = rememberScaffoldState()
-      val scope = rememberCoroutineScope()
+      rememberCoroutineScope()
       androidx.compose.material.Scaffold(
         scaffoldState = scaffoldState,
         topBar = { AppBar() },

@@ -11,7 +11,11 @@ class GetFarmsByIdUseCase @Inject constructor(
 
   override suspend fun invoke(id: Int): List<Farm> {
     return try {
-      farmRepository.getFarmsById(id)
+      if(id == -1) {
+        farmRepository.getFarms()
+      } else {
+        farmRepository.getFarmsById(id)
+      }
     } catch (e: Exception) {
       throw e
     }

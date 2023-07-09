@@ -1,7 +1,6 @@
 package com.example.appfazenda.farm.usecases
 
 import com.example.appfazenda.data.farm.FarmRepository
-import com.example.appfazenda.farm.usecases.contracts.IGetLastFarmIdUseCase
 import com.example.appfazenda.farm.usecases.contracts.IUpdateLastFarmIdUseCase
 import javax.inject.Inject
 

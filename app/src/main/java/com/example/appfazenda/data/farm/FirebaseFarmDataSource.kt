@@ -44,9 +44,6 @@ class FirebaseFarmDataSource @Inject constructor(
   }
 
   override suspend fun getFarms(): List<Farm> {
-
-    Log.i("teste", reference.toString())
-
     return suspendCoroutine { continuation ->
 
       reference.get().addOnSuccessListener { snapshot ->

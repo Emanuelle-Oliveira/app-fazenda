@@ -58,7 +58,7 @@ class CreateFarmActivity : ComponentActivity() {
     getLastFarmId()
     setContent {
       val scaffoldState = rememberScaffoldState()
-      val scope = rememberCoroutineScope()
+      rememberCoroutineScope()
       androidx.compose.material.Scaffold(
         scaffoldState = scaffoldState,
         topBar = { AppBar() },

@@ -11,7 +11,11 @@ class GetFarmsByNameUseCase @Inject constructor(
 
   override suspend fun invoke(name: String): List<Farm> {
     return try {
-      farmRepository.getFarmsByName(name)
+      if (name == ""){
+        farmRepository.getFarms()
+      } else {
+        farmRepository.getFarmsByName(name)
+      }
     } catch (e: Exception) {
       throw e
     }
